@@ -65,11 +65,15 @@ public class MsgParam implements Serializable {
     private String msg;
 
     /**
+     * 发送人
+     */
+    @Schema(description = "发送方")
+    private String sender;
+
+    /**
      * 租户ID
      */
     @Schema(description = "租户ID")
     private Long tenantId;
-
-    private String sender;
 
 }

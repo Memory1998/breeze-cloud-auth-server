@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.breeze.boot.mybatis.constant;
+package com.breeze.boot.mybatis.constants;
 
 import cn.hutool.core.text.StrPool;
 

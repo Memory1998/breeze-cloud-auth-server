@@ -141,7 +141,7 @@ public class SysFileServiceImpl extends ServiceImpl<SysFileMapper, SysFile> impl
                     .path(objectName)
                     .bizId(fileForm.getBizId())
                     .bizType(fileForm.getBizType())
-                    .format(extractFileFormat(originalFilename))
+                    .format(extractFileFormat(Objects.requireNonNull(originalFilename)))
                     .contentType(request.getContentType())
                     .bucket(SYSTEM_BUCKET_NAME)
                     .storeType(1)
@@ -158,7 +158,7 @@ public class SysFileServiceImpl extends ServiceImpl<SysFileMapper, SysFile> impl
 
         } catch (Exception ex) {
             log.error("[文件上传至Minio失败]", ex);
-            return Result.fail("文件上传至Minio失败");
+            throw new BreezeBizException(ResultCode.FAIL);
         }
         return Result.ok(resultMap);
     }

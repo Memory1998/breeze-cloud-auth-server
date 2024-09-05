@@ -213,7 +213,7 @@ public class SysMSubjectServiceImpl extends ServiceImpl<SysEmailSubjectMapper, S
     private SysEmailSubject getSysEmailSubject(Long id) {
         SysEmailSubject sysEmailSubject = this.getById(id);
         if (Objects.isNull(sysEmailSubject)) {
-            throw new BreezeBizException(ResultCode.EMAIL_UN_FOUND);
+            throw new BreezeBizException(ResultCode.EMAIL_NOT_FOUND);
         }
         return sysEmailSubject;
     }

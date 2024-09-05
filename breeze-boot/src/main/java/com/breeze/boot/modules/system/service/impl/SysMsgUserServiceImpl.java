@@ -21,6 +21,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.breeze.boot.core.enums.ResultCode;
+import com.breeze.boot.core.exception.BreezeBizException;
 import com.breeze.boot.core.utils.Result;
 import com.breeze.boot.modules.system.model.entity.SysMsgUser;
 import com.breeze.boot.modules.system.model.query.UserMsgQuery;
@@ -130,7 +132,7 @@ public class SysMsgUserServiceImpl extends ServiceImpl<SysMsgUserMapper, SysMsgU
     public Result<Boolean> removeUserMsgByIds(List<Long> ids) {
         List<SysMsgUser> sysMsgUserList = this.listByIds(ids);
         if (CollUtil.isEmpty(sysMsgUserList)) {
-            return Result.fail("用户消息不存在");
+            throw new BreezeBizException(ResultCode.NOT_FOUND);
         }
         boolean remove = this.removeByIds(ids);
         if (!remove) {

@@ -352,6 +352,9 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         return this.baseMapper.listUserByRole(roleCode);
     }
 
+    /**
+     * 同步用户
+     */
     @Override
     public void syncFlowableUser() {
         List<SysUser> sysUserList = this.list();
@@ -457,7 +460,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
             // 查询用户的角色
             List<UserRoleBO> userRoleBOList = Optional.ofNullable(sysRoleService.listRoleByUserId(sysUser.getId())).orElse(Collections.emptyList());
             if (CollUtil.isEmpty(userRoleBOList)) {
-                throw new BreezeBizException(ResultCode.SYSTEM_EXCEPTION);
+                throw new BreezeBizException(ResultCode.USERS_ROLE_IS_NULL);
             }
             // 获取部门名称
             this.setDeptName(sysUser, userInfo);

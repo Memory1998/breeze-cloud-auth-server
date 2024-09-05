@@ -22,6 +22,8 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.breeze.boot.core.enums.ResultCode;
+import com.breeze.boot.core.exception.BreezeBizException;
 import com.breeze.boot.core.utils.Result;
 import com.breeze.boot.modules.auth.mapper.SysTenantMapper;
 import com.breeze.boot.modules.auth.model.entity.SysTenant;
@@ -111,7 +113,7 @@ public class SysTenantServiceImpl extends ServiceImpl<SysTenantMapper, SysTenant
     public Result<Boolean> removeTenantByIds(List<Long> ids) {
         List<SysUser> sysUserList = this.sysUserService.list(Wrappers.<SysUser>lambdaQuery().in(SysUser::getTenantId, ids));
         if (CollUtil.isNotEmpty(sysUserList)) {
-            return Result.fail(Boolean.FALSE, "租户已经被使用");
+            throw new BreezeBizException(ResultCode.IS_USED);
         }
         return Result.ok(this.removeByIds(ids));
     }
