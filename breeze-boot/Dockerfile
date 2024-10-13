@@ -4,9 +4,6 @@ FROM breeze-jdk:8
 # 作者信息
 MAINTAINER gaoweixuan (breeze-cloud@foxmail.com)
 
-# 挂载目录
-VOLUME ./breeze
-
 # 创建目录
 RUN mkdir -p /usr/local/boot/breeze
 RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
